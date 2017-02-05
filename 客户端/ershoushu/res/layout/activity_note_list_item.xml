@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="45dp"
+    android:background="@drawable/list_selector"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+    <TextView
+        android:id="@+id/notelistid"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_weight="0" />
+
+    <!-- 标题 -->
+
+    <TextView
+        android:id="@+id/notelisttitle"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:text="标 题"
+        android:textColor="#040404"
+        android:textSize="12sp"
+        android:typeface="sans" />
+
+    <!-- 创建时间 -->
+
+    <TextView
+        android:id="@+id/notelistcreatetime"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/notelisttitle"
+        android:layout_marginRight="28dp"
+        android:layout_toLeftOf="@+id/TextView01"
+        android:gravity="center_vertical"
+        android:text="5:45"
+        android:textColor="#040404"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignBaseline="@+id/notelistcreatetime"
+        android:layout_alignBottom="@+id/notelistcreatetime"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="17dp"
+        android:gravity="center_vertical"
+        android:text="当前状态"
+        android:textColor="#040404"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/goodstype"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignBaseline="@+id/notelistcreatetime"
+        android:layout_alignBottom="@+id/notelistcreatetime"
+        android:layout_centerHorizontal="true"
+        android:text="分类"
+        android:textColor="#040404"
+        android:textSize="12sp" />
+
+</RelativeLayout>

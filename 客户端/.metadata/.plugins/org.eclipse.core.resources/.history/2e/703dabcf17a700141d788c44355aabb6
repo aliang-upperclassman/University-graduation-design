@@ -1,0 +1,110 @@
+package com.myapp.adapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.myapp.activity.R;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class PicListAdapter extends BaseAdapter {
+
+	private List<Map<String, Object>> mData;
+
+	private LayoutInflater mInflater;
+
+	public static Map<Integer, Boolean> isSelected;
+
+	private Context context;// 用于接收传递过来的Context对象
+
+	public PicListAdapter(Context context, List<Map<String, Object>> mData) {
+
+		this.context = context;
+
+		mInflater = LayoutInflater.from(context);
+
+		this.mData = mData;
+	}
+
+	@Override
+	public int getCount() {
+		System.out.print("mData.size()=" + mData.size());
+		return mData.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return position;
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
+
+	@Override
+	public View getView(final int position, View convertView, ViewGroup parent) {
+
+		ViewHolder holder = null;
+
+		// convertView为null的时候初始化convertView。
+		if (convertView == null) {
+
+			holder = new ViewHolder();
+
+			convertView = mInflater.inflate(R.layout.pic_list_item, null);
+
+			holder.title = (TextView) convertView.findViewById(R.id.title);
+
+			holder.id = (TextView) convertView.findViewById(R.id.id);
+
+			holder.id.setVisibility(View.GONE);
+
+			holder.img = (ImageView) convertView.findViewById(R.id.img);
+			
+			holder.createTime=(TextView) convertView.findViewById(R.id.createTime);
+
+			convertView.setTag(holder);
+
+		} else {
+
+			holder = (ViewHolder) convertView.getTag();
+
+		}
+
+		holder.title.setText(mData.get(position).get("title").toString());
+
+		holder.id.setText(mData.get(position).get("id").toString());
+		
+		String createTime=mData.get(position).get("createTime").toString();
+		holder.createTime.setText(mData.get(position).get("createTime").toString().su);
+
+		if (mData.get(position).get("img") != null) {
+			
+			holder.img.setImageBitmap((Bitmap) mData.get(position).get("img"));
+		}
+		
+		return convertView;
+	}
+
+	public final class ViewHolder {
+
+		public TextView title;
+
+		public TextView id;
+
+		public ImageView img;
+		
+		public TextView  createTime;
+	}
+
+}

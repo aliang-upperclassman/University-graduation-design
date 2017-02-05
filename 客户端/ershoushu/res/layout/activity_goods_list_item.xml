@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="45dp"
+    android:background="@drawable/list_selector"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+    <TextView
+        android:id="@+id/goodslistid"
+        style="@style/listview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0" />
+
+    <!-- 商品名称 -->
+
+    <TextView
+        android:id="@+id/goodslistname"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="就诊信息标题"
+        android:textColor="#040404"
+        android:textSize="13sp"
+        android:typeface="sans" />
+
+    <!-- 查看详情 -->
+
+    <TextView
+        android:id="@+id/goodslistcreatetime"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="2015-8-27"
+        android:textColor="#040404"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/chuangjianren"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignBaseline="@+id/goodslistcreatetime"
+        android:layout_alignBottom="@+id/goodslistcreatetime"
+        android:layout_marginRight="33dp"
+        android:layout_toLeftOf="@+id/goodslistcreatetime"
+        android:gravity="center"
+        android:text="admin"
+        android:textColor="#040404"
+        android:textSize="13sp" />
+
+</RelativeLayout>

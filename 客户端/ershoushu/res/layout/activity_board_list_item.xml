@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="150dp"
+    android:background="@drawable/list_selector"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+    <TextView
+        android:id="@+id/notelistid"
+        style="@style/listview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="用户名:" />
+
+    <TextView
+        android:id="@+id/yonghuming"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/notelistid"
+        android:layout_toRightOf="@+id/notelistid"
+        android:text="admin" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/notelistid"
+        android:layout_alignBottom="@+id/notelistid"
+        android:layout_marginLeft="70dp"
+        android:layout_toRightOf="@+id/yonghuming"
+        android:text="评论时间:" />
+
+    <TextView
+        android:id="@+id/pinglunshijian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/yonghuming"
+        android:layout_toRightOf="@+id/textView2"
+        android:text="2016-02-14" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/notelistid"
+        android:layout_marginTop="15dp"
+        android:text="评论内容:" />
+
+    <TextView
+        android:id="@+id/neirong"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView4"
+        android:text="内容" />
+    
+</RelativeLayout>

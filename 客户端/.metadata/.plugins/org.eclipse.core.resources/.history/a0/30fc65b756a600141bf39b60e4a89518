@@ -1,0 +1,5 @@
+package com.myweb.domain;
+
+public class News {
+
+}

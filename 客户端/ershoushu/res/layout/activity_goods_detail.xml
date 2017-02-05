@@ -1,0 +1,116 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/beijin"
+    android:layerType="software"
+    android:orientation="vertical" >
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/goodsdetail_img"
+            android:layout_width="fill_parent"
+            android:layout_height="160dip"
+            android:layout_gravity="center"
+            android:src="@drawable/logo" />
+
+        <View
+            android:layout_height="2dip"
+            android:background="#FFFFFF" />
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dip" >
+
+            <TextView
+                android:layout_gravity="right"
+                android:gravity="left"
+                android:text="书      名:" />
+
+            <TextView
+                android:id="@+id/goodsdetail_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="left"
+                android:text="" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:padding="10dip" >
+
+            <TextView
+                android:gravity="right"
+                android:text="类      型:" />
+
+            <TextView
+                android:id="@+id/goodsdetail_typename"
+                android:layout_marginLeft="10dp"
+                android:gravity="left"
+                android:text="" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:padding="10dip" >
+
+            <TextView
+                android:gravity="right"
+                android:text="发布时间:" />
+
+            <TextView
+                android:id="@+id/goodsdetail_createtime"
+                android:layout_marginLeft="10dp"
+                android:gravity="left"
+                android:text="" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:padding="10dip" >
+
+            <TextView
+                android:gravity="right"
+                android:text="发  布  人:" />
+
+            <TextView
+                android:id="@+id/faburen"
+                android:layout_marginLeft="10dp"
+                android:gravity="left"
+                android:text="" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dip" >
+
+            <TextView
+                android:gravity="right"
+                android:text="说      明:" />
+
+            <TextView
+                android:id="@+id/goodsdetail_description"
+                android:layout_width="220dip"
+                android:layout_height="220dip"
+                android:layout_marginLeft="10dp"
+                android:background="@color/base_start_color_pressed"
+                android:ems="10"
+                android:padding="5dip"
+                android:scrollbars="vertical" />
+        </TableRow>
+
+        <View
+            android:layout_height="2dip"
+            android:background="#FFFFFF" />
+    </TableLayout>
+
+</LinearLayout>

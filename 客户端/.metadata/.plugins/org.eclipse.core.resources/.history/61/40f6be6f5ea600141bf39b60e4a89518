@@ -1,0 +1,222 @@
+package com.myapp.activity;
+
+import com.alibaba.fastjson.JSONObject;
+import com.myapp.activity.R;
+import com.myapp.service.HttpUtil;
+import com.myweb.domain.User;
+
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Parcelable;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import android.os.Build;
+
+public class LoginActivity extends ActionBarActivity {
+
+	User user;// 存储用户登录信息
+
+	private ProgressDialog pd;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		setContentView(R.layout.activity_login);
+
+		ActionBar actionBar = getSupportActionBar();
+
+		actionBar.hide();// 隐藏ActionBar
+
+		final EditText loginTxt = (EditText) findViewById(R.id.editText1);
+
+		final EditText passwordTxt = (EditText) findViewById(R.id.editText2);
+
+		// 登录按钮
+		Button button1 = (Button) findViewById(R.id.button1);
+
+		button1.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+
+				/* 显示ProgressDialog */
+				pd = ProgressDialog.show(LoginActivity.this, "标题", "加载中，请稍后……");
+
+				Thread loginThread = new Thread(new LoginThread());
+
+				loginThread.start();
+			}
+		});
+
+		// 清空按钮
+		Button button2 = (Button) findViewById(R.id.button2);
+
+		button2.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+
+				loginTxt.setText("");
+
+				passwordTxt.setText("");
+			}
+		});
+
+	}
+
+	// 登录多线程
+	class LoginThread implements Runnable {
+
+		public void run() {
+			try {
+
+				String loginname = ((EditText) findViewById(R.id.editText1))
+						.getText().toString();
+
+				String loginpsw = ((EditText) findViewById(R.id.editText2))
+						.getText().toString();
+				
+				User user=new User();
+				
+				user.setLoginname(loginname);
+				
+				user.setLoginpsw(loginpsw);
+				// 检查用户名和密码是否为空
+				if (loginname == null || loginname.equals("")
+						|| loginpsw == null || loginpsw.equals("")) {
+
+					Message msg = new Message();
+
+					msg.what = 0;
+
+					handler.sendMessage(msg);
+
+					return;
+				}			 
+
+				System.out.println("==============" + JSONObject.toJSONString(user));
+
+				String result = HttpUtil.getJsonFromServlet(JSONObject.toJSONString(user),
+						"UserLoginService");
+
+				if (result.equals("")) {
+
+					Message msg = new Message();
+
+					msg.what = 2;// 程序有错误
+
+					handler.sendMessage(msg);
+				} else {
+					Message msg = new Message();
+
+					msg.what = 3;// 访问成功并有返回值
+
+					msg.obj = result.toString();
+
+					handler.sendMessage(msg);
+
+				}
+
+			} catch (Exception ex) {
+
+				System.out.println("ex: " + ex.getMessage());
+
+				Message msg = new Message();
+
+				msg.what = 1;// 网络异常
+
+				handler.sendMessage(msg);
+
+				Intent intent = new Intent(LoginActivity.this,
+						MainActivity.class);
+				// 启动Activity
+				startActivity(intent);
+			}
+		}
+	}
+
+	// Handler
+	Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+
+			super.handleMessage(msg);
+
+			switch (msg.what) {
+			case 0:
+				pd.dismiss();// 关闭ProgressDialog
+
+				Toast.makeText(getApplicationContext(), "用户名和密码不能为空!",
+						Toast.LENGTH_SHORT).show();
+				break;
+			case 1:
+				pd.dismiss();// 关闭ProgressDialog
+				Toast.makeText(getApplicationContext(), "登录失败,请检查网络是否畅通!",
+						Toast.LENGTH_SHORT).show();
+				break;
+			case 2:
+				pd.dismiss();// 关闭ProgressDialog
+				Toast.makeText(getApplicationContext(), "登录失败,请联系管理员!",
+						Toast.LENGTH_SHORT).show();
+				break;
+
+			case 3:
+				pd.dismiss();// 关闭ProgressDialog
+				
+				String result = (String) msg.obj;
+				try {
+
+					User user = JSONObject.parse(result,User.class);
+
+					String username = jsonObject.getString("username");
+
+					Toast.makeText(getApplicationContext(), "登录成功!",
+							Toast.LENGTH_SHORT).show();
+
+					Intent intent = new Intent(LoginActivity.this,
+							MainActivity.class);
+					// 启动Activity
+					startActivity(intent);
+
+				} catch (Exception ex) {
+
+					System.out.println("ex: " + ex.getMessage());
+				}
+				break;
+			}
+
+		}
+	};
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+}
